@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">skkKeyboard</string>
+    <string name="create_your_first_custom_keyboard_application">create your first custom keyboard application.</string>
+    <string name="enable_keyboard">Enable Keyboard</string>
+    <string name="choose_keyboard">Choose Keyboard</string>
 </resources>

@@ -11,17 +11,6 @@ import com.example.skkkeyboard.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private fun isKeyboardEnabled(): Boolean {
-        val inputmethodManager =
-            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        val enableInputMethods = inputmethodManager.enabledInputMethodList.map { it.id }
-        return enableInputMethods.contains("com.example.skkkeyboard/.InputMethodService")
-    }
-
-    private fun openKeyboardCooserSettings() {
-        val im = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        im.showInputMethodPicker()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,21 +22,34 @@ class MainActivity : AppCompatActivity() {
                   btnEnableKeyboard.isEnabled = false
               btnEnableKeyboard.setOnClickListener {
                   if (!isKeyboardEnabled())
-                    openKeyboardCooserSettings()
+                    openKeyboardSettings()
               }
-              btnCooseKeyboard.setOnClickListener {
+              btnChooseKeyboard.setOnClickListener {
                   if (isKeyboardEnabled())
-                      openKeyboardCooserSettings()
+                      openKeyboardChooserSettings()
                   else Toast.makeText(
                     this@MainActivity,
-                    "Coose the keyboard activation button",
+                    "Choose the keyboard activation button",
                     Toast.LENGTH_SHORT
                   ).show()
               }
         }
     }
+
     private fun openKeyboardSettings() {
         val intent = Intent(Settings.ACTION_INPUT_METHOD_SETTINGS)
         startActivity(intent)
+    }
+
+    private fun isKeyboardEnabled(): Boolean {
+        val inputmethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val enableInputMethods = inputmethodManager.enabledInputMethodList.map { it.id }
+        return enableInputMethods.contains("com.example.skkKeyboard/.InputMethodService")
+    }
+
+    private fun openKeyboardChooserSettings() {
+        val im = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        im.showInputMethodPicker()
     }
 }
